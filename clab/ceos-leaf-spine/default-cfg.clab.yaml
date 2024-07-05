@@ -1,0 +1,35 @@
+---
+# Adapted from https://github.com/arista-netdevops-community/building-containerlab-with-ceos
+name: ceos-lab-leaf-spine
+
+mgmt:
+  network: clab
+  ipv4-subnet: 172.100.100.0/24
+
+topology:
+  kinds:
+    ceos:
+      image: ceos:4.29.3M
+  defaults:
+    kind: ceos
+  nodes:
+    spine1:
+      mgmt-ipv4: 172.100.100.11
+    spine2:
+      mgmt-ipv4: 172.100.100.12
+    leaf1:
+      mgmt-ipv4: 172.100.100.21
+    leaf2:
+      mgmt-ipv4: 172.100.100.22
+    a_host:
+      mgmt-ipv4: 172.100.100.100
+
+  links:
+    - endpoints: ["spine1:eth1_1", "leaf1:eth1_1"]
+    - endpoints: ["spine1:eth2_1", "leaf2:eth1_1"]
+    - endpoints: ["spine2:eth1_1", "leaf1:eth2_1"]
+    - endpoints: ["spine2:eth2_1", "leaf2:eth2_1"]
+    - endpoints: ["leaf1:eth3_1", "leaf2:eth3_1"]
+    - endpoints: ["leaf1:eth4_1", "leaf2:eth4_1"]
+    - endpoints: ["leaf1:eth10_1", "a_host:eth1"]
+    - endpoints: ["leaf2:eth10_1", "a_host:eth2"]
