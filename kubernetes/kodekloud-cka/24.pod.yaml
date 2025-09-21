@@ -8,5 +8,6 @@ metadata:
     type: front-end
 spec:
   containers:
-  - name: nginx
-    image: nginx
+  - image: nginx
+    name: nginx
+    resources: {}
