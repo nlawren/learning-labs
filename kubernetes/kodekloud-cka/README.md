@@ -21,3 +21,10 @@ kubectl create deployment nginx --image=nginx
 kubectl create deployment nginx --image=nginx --dry-run=client -o yaml --replicas=3 > nginx-deployment.yaml
 ```
 
+## 42 - Namespaces
+
+```sh
+kubectl create -f pod-definition.yaml --namespace=dev
+```
+
+Or use a node-definition.yaml file that has `namespace: dev` in the metadata section (see 42.1.pod-definition.yaml)
