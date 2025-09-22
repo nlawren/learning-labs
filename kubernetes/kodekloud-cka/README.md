@@ -24,7 +24,13 @@ kubectl create deployment nginx --image=nginx --dry-run=client -o yaml --replica
 ## 42 - Namespaces
 
 ```sh
+kubectl create namespace dev
 kubectl create -f pod-definition.yaml --namespace=dev
+kubectl config set-context $(kubectl config current-context) --namespace=dev
 ```
 
 Or use a node-definition.yaml file that has `namespace: dev` in the metadata section (see 42.1.pod-definition.yaml)
+
+To create a namespace, either use a 'kind: Namespace' in a definition yaml file (see 42.2.namespace-definition.yaml file) or the kubectl command above.
+
+To set resource quota limits for a namespace, use a `ResourceQuota` yaml file (see 42.3 compute-quota.yaml).
