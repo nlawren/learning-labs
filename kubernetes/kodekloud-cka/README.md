@@ -1,5 +1,23 @@
 # Notes on the CKA course
 
+## Certification tips
+
+### Imperative commands
+
+```sh
+kubectl run nginx --image nginx
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port 80
+kubectl edit deployment nginx
+kubectl scale deployment nginx --replicas=3
+kubectl set image deployment nginx nginx=nginx:1.18
+```
+
+### Declarative
+
+* create objects: `kubectl apply -f nginx.yaml`
+* update objects: `kubectl apply -f nginx.yaml` - yes, the same command, but with an updated nginx.yaml file.
+
 ## Useful commands
 
 ### 29 - ReplicaSets and ReplicationController
