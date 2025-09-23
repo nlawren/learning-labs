@@ -11,6 +11,7 @@ kubectl expose deployment nginx --port 80
 kubectl edit deployment nginx
 kubectl scale deployment nginx --replicas=3
 kubectl set image deployment nginx nginx=nginx:1.18
+kubectl run httpd --image=httpd:alpine --port=80 --expose <- this creates both a pod and a service called httpd and exposes the pod on port 80
 ```
 
 ### Declarative
