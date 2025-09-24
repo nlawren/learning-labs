@@ -5,6 +5,10 @@
 ### Imperative commands
 
 ```sh
+kubectl config view <- check the context section (cluster, namespace,user)
+kubectl config use-context k8s
+kubectl get events -n node or just kubectl get events
+kubectl logs
 kubectl run nginx --image nginx
 kubectl create deployment nginx --image=nginx
 kubectl expose deployment nginx --port 80
