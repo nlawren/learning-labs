@@ -1,5 +1,9 @@
 # Notes on the CKA course
 
+## Useful websites
+
+- Kllr [Coda](https://killercoda.com/cka) <- excellent set of scenarios
+
 ## Certification tips
 
 ### Imperative commands
