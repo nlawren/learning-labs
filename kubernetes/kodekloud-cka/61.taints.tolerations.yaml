@@ -1,0 +1,20 @@
+---
+# kubectl taint nodes node1 app = blue:NoSchedule
+# is how you set a tain on a node
+# Different types of taint:
+# NoSchedule, PreferNoSchedule, NoExecute
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  spec:
+    containers:
+    - name: nginx-container
+      image: nginx
+    tolerations:
+    - key: app
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+
