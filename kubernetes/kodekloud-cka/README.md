@@ -44,6 +44,8 @@ kubectl scale --replicas=6 -f replicaset-definition.yaml
 ```sh
 kubectl run nginx --image nginx
 kubectl run nginx --image nginx --dry-run=client -o yaml > pod-nginx.yaml
+# then
+kubectl create -f pod-nginx.yaml
 kubectl create deployment nginx --image=nginx
 kubectl create deployment nginx --image=nginx --dry-run=client -o yaml --replicas=3 > nginx-deployment.yaml
 ```
@@ -61,3 +63,11 @@ Or use a node-definition.yaml file that has `namespace: dev` in the metadata sec
 To create a namespace, either use a 'kind: Namespace' in a definition yaml file (see 42.2.namespace-definition.yaml file) or the kubectl command above.
 
 To set resource quota limits for a namespace, use a `ResourceQuota` yaml file (see 42.3 compute-quota.yaml).
+
+## 61 - Taints and Tolerations
+
+Three types of taint: NoSchedule, PreferNoSchedule, NoExecute
+
+`kubectl taint node node01 key = value:effect(eg NoSchedule)` creates a taint.
+`kubectl taint node node01 key = value:effect-` removes the taint.
+Note: you can't create a pod from a kubectl command on the cli, rather use --dry-run=client -o yaml and edit the yaml file with the appropriate toleration statements.
