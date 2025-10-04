@@ -2,9 +2,11 @@
 
 ## Useful websites
 
-- Kllr [Coda](https://killercoda.com/cka) <- excellent set of scenarios
+- Kller [Coda](https://killercoda.com/cka) <- excellent set of scenarios
 
 ## Certification tips
+
+## Useful commands
 
 ### Imperative commands
 
@@ -22,12 +24,10 @@ kubectl set image deployment nginx nginx=nginx:1.18
 kubectl run httpd --image=httpd:alpine --port=80 --expose <- this creates both a pod and a service called httpd and exposes the pod on port 80
 ```
 
-### Declarative
+### Declarative commands
 
 * create objects: `kubectl apply -f nginx.yaml`
 * update objects: `kubectl apply -f nginx.yaml` - yes, the same command, but with an updated nginx.yaml file.
-
-## Useful commands
 
 ### 29 - ReplicaSets and ReplicationController
 
