@@ -26,8 +26,8 @@ kubectl run httpd --image=httpd:alpine --port=80 --expose <- this creates both a
 
 ### Declarative commands
 
-* create objects: `kubectl apply -f nginx.yaml`
-* update objects: `kubectl apply -f nginx.yaml` - yes, the same command, but with an updated nginx.yaml file.
+- create objects: `kubectl apply -f nginx.yaml`
+- update objects: `kubectl apply -f nginx.yaml` - yes, the same command, but with an updated nginx.yaml file.
 
 ### 29 - ReplicaSets and ReplicationController
 
