@@ -66,8 +66,28 @@ To set resource quota limits for a namespace, use a `ResourceQuota` yaml file (s
 
 ## 61 - Taints and Tolerations
 
-Three types of taint: NoSchedule, PreferNoSchedule, NoExecute
+- Taints are on nodes, tolerations are on pods
+- 3 types of taint-effect: 1. NoSchedule, 2 PreferNoSchedule and 3 NoExecute
 
 `kubectl taint node node01 key = value:effect(eg NoSchedule)` creates a taint.
 `kubectl taint node node01 key = value:effect-` removes the taint.
 Note: you can't create a pod from a kubectl command on the cli, rather use --dry-run=client -o yaml and edit the yaml file with the appropriate toleration statements.
+
+Here is a sample yaml file for creating a pod that will work with the following taint:
+`kubectl taint node node01 spray = mortein:NoSchedule`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee
+spec:
+  containers:
+  - name: bee
+    image: nginx
+  tolerations:
+  - key: "spray"
+    operator: "Equal"
+    value: "mortein"
+    effect: "NoSchedule"
+```
