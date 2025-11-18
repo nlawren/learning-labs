@@ -59,12 +59,10 @@ kubectl config set-context $(kubectl config current-context) --namespace=dev
 ```
 
 Or use a node-definition.yaml file that has `namespace: dev` in the metadata section (see 42.1.pod-definition.yaml)
-
 To create a namespace, either use a 'kind: Namespace' in a definition yaml file (see 42.2.namespace-definition.yaml file) or the kubectl command above.
-
 To set resource quota limits for a namespace, use a `ResourceQuota` yaml file (see 42.3 compute-quota.yaml).
 
-## 61 - Taints and Tolerations
+## 62 - Taints and Tolerations
 
 - Taints are on nodes, tolerations are on pods
 - 3 types of taint-effect: 1. NoSchedule, 2 PreferNoSchedule and 3 NoExecute
@@ -91,3 +89,54 @@ spec:
     value: "mortein"
     effect: "NoSchedule"
 ```
+
+## 65 - Node Selectors
+
+This is how you select different nodes to an resource unbalanced cluster. So you set a limitation on the pod to determine which type of node to run on - this can easily be done by a node selector. A node selector works by assigning a key:value pair to the node definition and matching it with the same k:v in the pod-definition.yaml file:
+
+```yaml
+apiVersion:
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  nodeSelector:
+    size: Large
+```
+
+To label a node, you use the following command:
+`kubectl label nodes <node-name> <label-key>=<label-value>`
+for example:
+`kubectl label nodes node1 size=Large`
+
+## 66 - Node Affinity
+
+The primary feature of node affinity is to ensure that pods are hosted on particular nodes. This is (or can be) more complex than using node selectors but allows significantly more flexibility (eg large and medium but not small)
+
+An example pod-definition.yaml file:
+
+```yaml
+apiVersion:
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  affinity:
+    nodeAffinity:
+      requiredDuringSechedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:
+            - Large
+```
+
+Operators can be In, NotIn, Exists etc
+The other type of nodeAffinity is preferredDuringSchedulingIgnoredDuringExecution.
